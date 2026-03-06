@@ -4,7 +4,6 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>تکسیر جفر</title>
-  <!-- Google Urdu Font -->
   <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu&display=swap" rel="stylesheet">
   <style>
     body { 
@@ -155,11 +154,18 @@
         count++;
       }
 
-      addLine(chars);
-      do {
+      addLine(chars); // پہلی سطر (زمام)
+      
+      while(true) {
         current = (mode==='sadar-muakhar') ? takseerSadarMuakhar(current) : takseerMuakharSadar(current);
+        
+        // اگر نئی سطر اصل عبارت کے برابر ہو جائے تو لوپ توڑ دیں تاکہ اسے پرنٹ نہ کیا جائے
+        if(current.join('') === chars.join('')) {
+            break;
+        }
+        
         addLine(current);
-      } while(current.join('') !== chars.join(''));
+      }
     };
 
     document.getElementById('clear').onclick = () => {
